@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+        Meta.html
+{% endblock %}
+
+{% block corpo %}
+    <div class="bgmeta_leitura mt-5">
+
+        {% for meta in calculoMeta %}
+
+            <div class="alert alert-warning" role="alert">
+
+                <div class="container">
+                    <div class="row mt-3">
+                        <div class="col-md-4 h-100 text-center">
+                            <img class="card-img-top img-fluid" src="{% static 'images/' %}{{ meta.imagem }}" style="width:150px ;">
+                        </div>
+
+                        <div class="col-md-8 h-100 text-left">
+                             {% for conta in contas %}
+                                <h3>{{ conta.texto }} <strong>{{ conta.contador }}</strong> {{ conta.complemento }}.</h3>
+                            {% endfor %}
+
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped bg-info"  aria-label="Info meta" style="width: {{ meta.total }}%">{{ meta.total }}%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+      </div>
+
+      <div class="conquistas mb-5">
+         <div class="bg-light ">
+            <div class="container text-center">
+               <h3 class="mb-3 font-weight-bold" id="artigos">Conquistas</h3>
+               <div class="row">
+
+                  {% for card in cards %}
+                     <div class="col-md-3">
+                        <div class="card shadow-lg h-100">
+
+                           <img src="{% static 'images/' %}{{ card.imagem }}">
+
+                           <div class="card-body">
+                              <h5 class="card-title">{{ card.titulo }}</h5>
+                              <p class="card-text">{{ card.texto }}</p>
+                           </div>
+
+                           <div class="card-footer text-right">
+                              <button class="btn btn-outline-info">{{ card.botao }}</button>
+                           </div>
+                        </div>
+
+                     </div>
+                  {% endfor %}
+
+
+               </div>
+
+            </div>
+         </div>
+      </div>
+{% endblock %}

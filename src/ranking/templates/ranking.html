@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+        Ranking.html
+{% endblock %}
+
+{% block corpo %}
+    <div style="margin-top:80px;"></div>
+        <div class="conteudo">
+        <div class="container">
+            <h2><div class="font-weight-bold">Top Mais Pesquisados</div></h2>
+            <div>Abaixo os mais acessados no site:</div>
+            <hr width="100%">
+        </div>
+
+        <div class="container mt-3 mb-2">
+            <div class="row">
+                <!--Lista não ordenada-->
+                <div class="col-md-3 container">
+                    <h4><div class="font-weight-bold">Top 10</div></h4>
+                    <ul class="list-group border-0">
+                        {% for nome in nomeListas %}
+                            <a href="#"><li class="list-group-item {% if nome.ativo %} active bg-info {% endif %} border-0 ">{{ nome.titulo }}</li></a>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            <!--Aqui começa a tabela ocupando 10 espaços-->
+            <!--table-hover - realiza a mudança de cor da linha quando o mouse estiver pousado-->
+            <!--primary - estilização da tabela, podendo ser secondary,dark,light...-->
+            <!--container - centralizar-->
+            <div class="col-md-9">
+                <table class="table table-hover table-primary shadow-lg">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Top 10</th>
+                            <th scope="col">Informações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for classificado in top10 %}
+                            <tr>
+                                <th scope="row">{{  classicado.posicao  }}</th>
+                                <td>
+                                    <img src="{% static 'images/' %}{{ classificado.imagem }}" style="width:100px ;">
+                                </td>
+
+                                <td>
+                                    <div class="container">
+                                        <p>Título: {{ classificado.titulo }}</p>
+                                        <p>Autor: {{ classificado.autor }}</p>
+                                        <p>Gênero: {{ classificado.genero }}</p>
+                                        <p>Classificação:
+                                            {% for i in '12345'|make_list %}
+                                               {% if  classificado.classificacao  >= forloop.counter %}
+                                                    <i class="fa-solid fa-star"></i>
+                                                {% endif %}
+                                            {% endfor %}
+                                            {% if classificado.metade %}
+                                                <i class="fa-solid fa-star-half-stroke"></i>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </td>
+
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,22 @@
+from metas.models import CardsMeta, CalculoMetas, Contas
+
+card1 = CardsMeta(titulo="Livro de Diamante", texto="Mais de 20 livros lidos no mês.", imagem="conquistas1.png")
+card2 = CardsMeta(titulo="Pena de Ouro", texto="Mais de 10 livros cadastrados e favoritados pela galera.", imagem="conquistas2.png")
+card3 = CardsMeta(titulo="Crítico de Prata", texto="Resenhou mais de 10 livros no mês.", imagem="conquistas3.png")
+card4 = CardsMeta(titulo="Pé de Bronze", texto="Primeiro livro cadastrado está na lista dos mais pesquisados do mês.", imagem="conquistas4.png")
+
+card1.save()
+card2.save()
+card3.save()
+card4.save()
+
+
+meta1 = CalculoMetas(imagem="meta.png", total=50)
+contas1 = Contas(categoria="desejado", contador=1000, texto="Queremos ler", complemento="livros.")
+contas2 = Contas(categoria="atual", contador=500, texto="Já lemos", complemento="livros.")
+contas3 = Contas(categoria="participantes", contador=250, texto="Somos", complemento="participantes.")
+
+meta1.save()
+contas1.save()
+contas2.save()
+contas3.save()

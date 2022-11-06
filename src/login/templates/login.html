@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+        Login.html
+{% endblock %}
+
+{% block corpo %}
+        <div class="container">
+         <div class="row mt-5">
+            <div class="col-md-6 col-sm-6 mt-5">
+                {% for divulgacao in divulgacao %}
+
+                    <h2>{{ divulgacao.titulo }}</h2>
+                    <div><p>{{ divulgacao.texto }}</p></div>
+
+                    <div class="jumbotron badge-info bg-dark text-center shadow-lg p-2 p-md-3">
+                        <h3>{{ divulgacao.titulo_inscricao }}</h3>
+                        <p>{{ divulgacao.texto_inscricao }}</p>
+                        <img src="{% static 'images/' %}{{ divulgacao.imagem }}" class=" w-75">
+                        <hr>
+                        <p class="text-right">
+                            <a class="btn btn-info" href="#" role="button">{{ divulgacao.botao }}<i class="fa-solid fa-note-sticky"></i></a>
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!--data-toggle = "modal" - chama o algorítmo do js que faz o modal ser exibido-->
+            <!--form-group - adiciona estrutura aos formulários.-->
+            <!--col-form-label- centraliza verticalmente os labels com seus controles de formulário associados.-->
+            <!--col-lg - quantos espaços ocupa-->
+            <!--form-control - estiliza, tornando-o grande, no caso-->
+
+
+            <div class="formulario col-md-6 col-sm-6">
+               <div class="cadastro mt-5">
+                  <h4>Primeira vez por aqui? Cadastre-se: </h4>
+                  <div class="text-center">
+                     <button class="btn btn-primary w-50 mb-lg-auto mt-2" href="#cadastromodal" data-bs-toggle="modal" type="submit"><i class="fa-solid fa-book-open-reader"></i> Cadastre-se</button>
+                  </div>
+                  <div class="mb-5"></div>
+                  <h4>Acessar minha conta: </h4>
+
+                  <div class="form-group row">
+                     <label for="e-mail" class="col-form-label col-lg-2"><i class="fa-solid fa-at"></i>Login</label>
+                     <div class="col-lg-10">
+                        <input type="text" class="form-control" placeholder="Login" id="login" name="login">
+                     </div>
+                  </div>
+
+                  <div class="form-group row">
+                     <label for="senha" class="col-form-label col-lg-2"><i class="fa-solid fa-unlock-keyhole"></i>Senha</label>
+                     <div class="col-lg-10">
+                        <input type="text" class="form-control" placeholder="Senha" id="senha" name="senha">
+                     </div>
+                  </div>
+                  <div class="text-center">
+                     <button class="btn btn-primary w-50 mb-lg-auto mt-2"  href="#" type="submit"><i class="fa-solid fa-right-to-bracket"></i> Entrar</button>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <!--Começo da classe modal-->
+      <!--tamanho default: 500px pois não foram especificadas nenhuma classe modal-{tamanho} -->
+      <!--modal fade - Para o modal aparecer na tela quando chamado-->
+      <!--id referente ao href do botão cadastre-se-->
+      <!--modal-content - envolve o modal em um container-->
+      <!--modal-title - titulo do modal-->
+      <!--class="close" - estiliza o botão-->
+      <!--data-dismiss - nome da função do js do bootstrap que será executada quando o botão for clicado, no caso, indicando que
+         a função fechará o modal -->
+      <!--aria-label - ajuda os deficientes visuais a saber para que serve o botão-->
+      <!--aria-hidden = true - indica que o valor do span deve ser ignorado pelos deficientes visuais-->
+      <!--&times; = responsável pelo "x"-->
+
+
+
+      <!--Modal body-->
+      <!--Form action - contém o endereço para onde a req http deverá ser enviada quando o form for submetido-->
+      <!--fieldset - conjunto de campos-->
+      <!--form-group - margin-bottom de 16px após o fieldset-->
+      <!--legend - (Não foi colocado) indica uma legenda-->
+      <!--label deve conter o atributo do id, para que se clicado, o cursor seja direcionado ao valor do id-->
+      <!--form-control - faz uma caixa de texto maior-->
+      <!--Placeholder- é exibido um texto dentro da caixa de texto-->
+      <!--name - atributo que define a caixa digitada no envio da requisição-->
+      <!--col-form-label do elemento label centraliza o label na caixa de texto definida pelo elemento input-->
+      <!--col-lg-2 - ocupa 2 colunas do greed do bootstrap do large em diante-->
+
+      <!--font-weight-bold- Negrito-->
+
+
+      <div class="modal fade" id="cadastromodal">
+         <div class="modal-dialog">
+            <div class="modal-content">
+               <div class="modal-header">
+                  <span class="modal-title font-weight-bold"> Cadastre-se</span>
+                  <button type="botton" class="close" data-bs-dismiss="modal" aria-label="close">
+                     <span aria-hidden="true">&times;</span>
+                  </button>
+               </div>
+               <div class="modal-body">
+                  <form action="">
+                    {% for campo in listaCampos %}
+                        <fieldset class="form-group">
+                            <div class="form-group row">
+                                <label for="{{ campo.campo }}" class="col-form-label col-lg-2">{{ campo.placeholder }}</label>
+                                <div class="col-lg-10">
+                                <input type="text" class="form-control" placeholder="{{ campo.placeholder }}" id="{{ campo.campo }}" name="{{ campo.nome }}">
+                                </div>
+                            </div>
+                        </fieldset>
+                      {% endfor %}
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+{% endblock %}

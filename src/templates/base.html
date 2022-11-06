@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block titulo %}
+        Titulo default
+        {% endblock %}
+    </title>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/all.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/fontawesome.all.min.css' %}" rel="stylesheet" />
+
+</head>
+<body>
+    {% block cabeçalho %}
+        <div class="offcanvas offcanvas-start bg_sobre" data-bs-scroll="true" id="canvas-id" >
+
+      <div class="offcanvas-header">
+        <h4 class="offcanvas-title">Sobre o projeto: </h4>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+
+          <div class="offcanvas-body">
+            <p>Esse site foi criado por Camila Ferreira, amante de livros e de computação.
+             A proposta do projeto é desenvolver páginas responsivas apresentando como foco o framework Bootstrap.</p>
+             <p> O tema escolhido para as páginas foi divulgação de autores brasileiros.
+                A fonte de inspiração para o trabalho foi o skoob. </p>
+
+            <p><i class="fa-regular fa-lightbulb"></i> Além dos componentes apresentados pelo professor, o site contém: </p>
+
+            <ul>
+             <li>Alert</li>
+             <li>Badge</li>
+             <li>List group</li>
+             <li>Navs and tabs</li>
+             <li> Offcanvas</li>
+             <li>Progress</li>
+             <li>Tables</li>
+            </ul>
+
+          </div>
+        </div>
+
+        <nav class="navbar navbar-light navbar-expand-md fixed-top bg-info">
+
+          <div class="container">
+             <button class="btn" type="button" data-bs-toggle="offcanvas" data-bs-target="#canvas-id" ><img src="{% static 'images/logo.png' %}" style="width: 150px" alt="logo"></button>
+
+
+             <div class="row d-none d-md-block">
+                <div class="mr-5 col-md-9"> <!--  mr= margin right -->
+
+                   <form class="d-flex " role="search">
+                      <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search" style="width: 500px">
+
+                      <button class="btn btn-light" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                   </form>
+
+                </div>
+             </div>
+
+             <!-- atributos aria_ Atributos lidos por screen readers para ajudar deficientes visuais a entender conteúdo de um site -->
+             <!-- data-toggle= "collapse" _ Chama o algorítmo do js que faz a barra de navegação ser escondida ou exibida -->
+             <!-- data-target _ Indica o conteúdo a ser escondida ou exibida -->
+
+             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+             </button>
+
+             <div class="collapse navbar-collapse"> <!-- collapse navbar-collapse: Diminui a navbar pra dispositivos menores-->
+
+                <div class="navbar-nav mr-auto">
+                   <div class="dropdown">
+                   <!-- data-bs-toogle: Chama a função dropdown do js -->
+                      <a class="nav-link nav-item dropdown-toggle" data-bs-toggle="dropdown" href="#">Explorar</a>
+                      <div class="dropdown-menu"> <!-- Classe bootstrap -->
+                         <a class="dropdown-item" href="#">Leitores</a>
+                         <a class="dropdown-item" href="#">Lançamentos</a>
+                         <a class="dropdown-item" href="#">Trocas</a>
+                         <a class="dropdown-item" href="#">Cortesias</a>
+                         <a class="dropdown-item" href="#">Fórum de discussões</a>
+                         <a class="dropdown-item" href="/ranking/">Ranking</a>
+                         <a class="dropdown-item" href="/metas/">Meta de leitura</a>
+                         <a class="dropdown-item" href="#">Retrospectiva</a>
+                      </div>
+                   </div>
+                </div>
+
+                <div class="navbar-nav">
+                   <a class="nav-link nav-item" href="/login/">Entrar</a>
+                </div>
+
+             </div>
+
+             <div class="collapse navbar-collapse" id = "menu"> <!-- collapse navbar-collapse: Diminui a navbar pra dispositivos menores-->
+                <div class="navbar-nav d-sm-block d-md-none">
+                   <a class="nav-link nav-item" href="#">Leitores</a>
+                   <a class="nav-link nav-item" href="#">Lançamentos</a>
+                   <a class="nav-link nav-item" href="#">Trocas</a>
+                   <a class="nav-link nav-item" href="#">Cortesias</a>
+                   <a class="nav-link nav-item" href="#">Fórum de discussões</a>
+                   <a class="nav-link nav-item" href="/ranking/">Ranking</a>
+                   <a class="nav-link nav-item" href="/meta/">Meta de leitura</a>
+                   <a class="nav-link nav-item" href="#">Retrospectiva</a>
+                   <a class="nav-link nav-item" href="/login/">Entrar</a>
+                </div>
+             </div>
+        </nav>
+    {% endblock %}
+
+    {% block corpo %}
+
+    {% endblock %}
+
+    {% block rodape %}
+    <div class="footer bg-info">
+      <div class="container">
+         <div class="row">
+
+            <div class="col-md-3 col-sm-center">
+               <a class="navbar-brand" href="/"><img src="{% static 'images/logo.png' %}" style="width: 150px"></a>
+            </div>
+
+            <div class="col-md-5 col-sm-6">
+               <div id="frases-id" class="carousel slide" data-bs-ride="carousel" data-interval="8000">
+                  <div class="carousel-inner">
+
+                     <div class="carousel-item active w-15">
+                        <div class="frase text-center">Livros não mudam o mundo, quem muda o mundo são as pessoas. Os livros só mudam as pessoas.</div>
+                        <div class="autor font-italic text-lg-right"> Mário Quintana<i class="fa-solid fa-pen"></i></div>
+                     </div>
+
+                     <div class="carousel-item w-15">
+                        <div class="text-center"> A poesia não está nos versos, por vezes ela está no coração. E é tamanha. A ponto de não caber nas palavras.</div>
+                        <div class="font-italic text-lg-right"> Jorge Amado<i class="fa-solid fa-pen"></i></div>
+                     </div>
+
+                  </div>
+               </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6">
+               <ul class="list-unstyled">
+
+                  <li><a href='#'>Quem Somos</a></li>
+                  <li><a href='#'>Cadastro de livros</a></li>
+                  <li><a href='#'>Cadastro de autores</a></li>
+                  <li><a href='#'>Parceria</a></li>
+                  <li><a href='#'>Contato</a></li>
+
+               </ul>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="end-page d-none d-md-block">
+      <div class="container">
+         <div class="row">
+            <div class="col-md-3 col-sm-3 ">
+               <a class="list-unstyled" href="#">Livros</a>
+            </div>
+            <div class="col-md-3 col-sm-3 ">
+               <a class="list-unstyled" href="#">Autores</a>
+            </div>
+            <div class="col-md-3 col-sm-3 ">
+               <a class="list-unstyled" href="#">Editoras</a>
+            </div>
+            <div class="col-md-3 col-sm-3 ">
+               <a class="list-unstyled" href="#">Leitores</a>
+            </div>
+         </div>
+      </div>
+   </div>
+    {% endblock %}
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
+    <script src="{% static 'js/fontawesome.all.min.js' %}"></script>
+</body>
+</html>

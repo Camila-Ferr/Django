@@ -1,0 +1,32 @@
+from inicial.models import Sorteio, Noticia, Carrossel
+sorteio1 = Sorteio(titulo="Natali e sua vontade idiota de agradar a todo mundo", imagem="Sorteio1.jpg", tamanho="160")
+sorteio2 = Sorteio(titulo="O avesso da pele", imagem="Sorteio2.jpg", tamanho="160")
+sorteio3 = Sorteio(titulo="Fundo do poço", imagem="Sorteio3.jpg", tamanho="160")
+sorteio4 = Sorteio(titulo="Enquanto eu não te encontro", imagem="Sorteio4.jpg", tamanho="160")
+sorteio5 = Sorteio(titulo="Confusões de um garoto", imagem="Sorteio5.jpg", tamanho="156")
+sorteio6 = Sorteio(titulo="O mundo que habita em nós", imagem="Sorteio6.jpg", tamanho="160")
+
+noticia1 = Noticia(titulo="Perdida | Giovanna Grigio irá estrelar adaptação do livro de Carina Rissi", imagem="artigo1.jpg", data="19 de Maio de 2022", tamanho="150",ativo=True, identificador="series", texto="Séries",margin=True)
+noticia2 = Noticia(titulo="Confira tudo o que rolou na Bienal do Livro em São Paulo", imagem="artigo2.jpg", data="14 de Julho de 2022", tamanho="210", identificador="eventos", texto="Eventos")
+noticia3 = Noticia(titulo="Curitiba cria projeto em homenagem a Clarice Lispector", imagem="artigo3.jpg", data="22 de Maio de 2022", tamanho="150", identificador="homenagens", texto="Homenagens", margin=True)
+noticia4 = Noticia(titulo="A importância da feira do livro na construção de novos leitores", imagem="artigo4.jpg", data="24 de Maio de 2022", tamanho="200", identificador="leitura", texto="Literature-se")
+
+carrossel1 = Carrossel(imagem="banner1.jpg", ativo=True)
+carrossel2 = Carrossel(imagem="banner2.jpg")
+carrossel3 = Carrossel(imagem="banner3.jpg")
+
+sorteio1.save()
+sorteio2.save()
+sorteio3.save()
+sorteio4.save()
+sorteio5.save()
+sorteio6.save()
+
+noticia1.save()
+noticia2.save()
+noticia3.save()
+noticia4.save()
+
+carrossel1.save()
+carrossel2.save()
+carrossel3.save()

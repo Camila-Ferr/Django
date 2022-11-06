@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block titulo %}
+        Index.html
+{% endblock %}
+
+{% block corpo %}
+
+   <!-- Carrossel-->
+
+   <!-- d-none usado na div abaixo indica que ela não será exibida, mas o atributo d-md-block indica que ela será exibida para
+   dispositivos médios ou maiores.-->
+   <!-- Slide- fotos deslizam no carrossel.-->
+   <!-- Mb-4: Margem de 24px entre o carrosel e o conteúdo abaixo.-->
+   <!--Data-ride: inicializa o carrossel-->
+   <!--Data-interval: tempo que a imagem será trocada-->
+   <!--carousel-fade : Não foi utilizado mas faria a imagem surgir na tela-->
+   <!--carousel-indicators : lista ordenada<ol> para indicar o slide desejado a aparecer na tela-->
+
+   <div class="bgcarrosel d-none d-md-block" style="margin-top: 66px">
+      <div id="carrosel-id" class="carousel slide d-none d-md-block mb-4 container" data-bs-ride="carousel" data-interval="4000">
+
+         <ol class="carousel-indicators">
+            <li data-bs-target="#carrosel-id" data-bs-slide-to="0"  class="active"></li>
+            <li data-bs-target="#carrosel-id" data-bs-slide-to="1" ></li>
+            <li data-bs-target="#carrosel-id" data-bs-slide-to="2" ></li>
+         </ol>
+
+         <div class="carousel-inner">
+            {% for carrossel in listaCarrossel %}
+               <div class="carousel-item {% if carrossel.ativo %} active {% endif %} ">
+                  <img src="{% static 'images/' %}{{ carrossel.imagem }}"  class="d-block w-100" style="height:280px">
+               </div>
+            {% endfor %}
+
+         </div>
+      </div>
+   </div>
+
+   <!--Sorteios-->
+   <!--card-deck - vários cards-->
+   <!--border-0 - nenhuma borda-->
+   <!--align-self-center - Alinhar a si mesmo no centro (mostrar no modo sm)-->
+   <!--img-fluid- imagem responsiva-->
+   <!--d-none - não aparecer-->
+   <!--d-lg-block - aparecer no modo large-->
+   <!--d-lg-md - aparecer no modo médio-->
+   <div class="container">
+
+      <div class="card mt-5 mt-md-3 shadow-lg">
+         <div class="card-deck mt-4 mt-md-0">
+
+            {% for sorteio in listaSorteio %}
+               <div class="card border-0 align-self-center">
+                  <img class="card-img-top img-fluid" src="{% static 'images/' %}{{ sorteio.imagem }}" style="width: {{ sorteio.altura }}px;">
+               </div>
+
+            {% endfor %}
+         </div>
+
+         <div class="card-body">
+            <div class="row">
+               <div class="col-md-10">
+                  <div class="card-title font-weight-bold">Sorteio de milhares de cortesias</div>
+                  <div class="card-text"> Seja um dos primeiros a ler os principais lançamentos editoriais.</div>
+               </div>
+
+               <div class="col-md-2 text-right">
+                  <button type="button" class="btn btn-outline-primary">Confira <i class="fa-solid fa-book-open"></i></button>
+               </div>
+
+            </div>
+         </div>
+
+      </div>
+   </div>
+
+   <!--Notícias-->
+   <!--nav - Aba de navegação-->
+   <!--d-flex - É ultilizado para que a aba e a notícia fiquem alinhadas  -->
+   <!--flex-column- Indica que o alinhamento da lista deve ser em colunas-->
+   <!--nav-tabs - criar regiões tabuladas com o plug-in JavaScript. Responsável pelo efeito quando a guia é clicada.-->
+   <!-- data-bs-toggle="tab" - Para tornar as guias alternáveis-->
+   <!--data-bs-target - indicar a guia que irá abrir-->
+   <!--aria-selected="true" - indicar para os screen-readers que só pode ter um selecionado e que o conteúdo de cada selecionado é diferente-->
+
+   <!--tab-content - colunas dividas em subsessões-->
+   <!--tab-pane - indicar que o conteúdo dentro da div é de uma coluna-->
+   <!--fade - componente de estilo mostrando como o conteúdo será apresentado-->
+   <!--card-footer - linha ao final do card-->
+   <!--row e card-columns - alinha o texto e a foto na mesma linha-->
+   <div class="container mt-3">
+      <div class="d-flex ">
+
+         <ul class="nav flex-column nav-tabs border-bottom-0">
+
+            {% for noticia in listaNoticia %}
+               <li class="nav-item">
+                  <button class="nav-link  {% if noticia.ativo %} active {% endif %} w-100" data-bs-toggle="tab" data-bs-target="#{{ noticia.identificador }}" type="button" aria-selected=" {% if noticia.ativo %} true {% else %} false {% endif %} ">{{ noticia.texto }}</button>
+               </li>
+            {% endfor%}
+         </ul>
+
+         <div class="tab-content" >
+            {% for noticia in listaNoticia %}
+               <div class=" tab-pane fade {% if noticia.ativo %} show active {% endif %} " id="{{ noticia.identificador }}" data-bs-toggle="tab" >
+
+                  <div class="row card-columns">
+
+                     <div class="col-md-3 col-lg-2 h-100 ">
+                        <img src="{% static 'images/' %}{{ noticia.imagem }}" style="width: {{ noticia.tamanho }}px;" >
+                     </div>
+
+                     <div class="card-body col-md-6">
+                        <h5 class="card-title {% if noticia.margin %} ml-5 {% endif %}">{{ noticia.titulo }}</h5>
+                        <p class="card-text {% if noticia.margin %} ml-5 {% endif %}">{{ noticia.data }}</p>
+
+                        <div class="card-footer text-right">
+                           <button class="btn btn-outline-primary">Confira <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                     </div>
+                  </div>
+
+               </div>
+            {% endfor %}
+         </div>
+
+      </div>
+   </div>
+{% endblock %}
+

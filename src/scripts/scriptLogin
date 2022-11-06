@@ -1,0 +1,17 @@
+from login.models import Divulgacao, Formulario
+divulgacao1 = Divulgacao(titulo="Descubra autores perto de você",
+                          texto = "A plataforma foi criada pensando em dar visibilidade a obras nacionais e oferecer uma experiência única de conversa entre o escritor e o leitor. Sinta-se em casa para conhecer novas obras e fazer amizades.",
+                          titulo_inscricao = "Envie seu desenho para a gente",
+                          texto_inscricao = "Em breve faremos uma disputa de desenhos baseados em personagens literários brasileiros. Envie o seu!",
+                          imagem="entrar.jpg",
+                          botao = "Regras para envio")
+divulgacao1.save()
+
+
+campo1 = Formulario(campo="nome", placeholder="Nome", nome="nome")
+campo2 = Formulario(campo="senha-cadastro", placeholder="Senha", nome="senha")
+campo3 = Formulario(campo="e-mail", placeholder="E-mail", nome="e-mail")
+
+campo1.save()
+campo2.save()
+campo3.save()
