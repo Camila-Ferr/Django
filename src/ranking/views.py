@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from ranking.models import *
+from ranking.models import Ranking, Lista
+
 
 def ranking(request):
     top10 = Ranking.objects.all().order_by('posicao')

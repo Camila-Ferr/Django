@@ -5,5 +5,5 @@ from ranking import views
 app_name = 'ranking'
 
 urlpatterns = [
-    path('', views.ranking, name='index')
+    path('', views.ranking, name='ranking')
 ]
