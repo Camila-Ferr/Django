@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block titulo %}
+   Exibe Parceiros
+{% endblock %}
+
+{% block corpo %}
+<div class="container mt-5 mb-5" >
+   <div class='mb-4'>
+      <h5>Exibe Parceiros</h5>
+      <hr class='mt-0'>
+   </div>
+
+   <!-- <div style="min-height: 322px"> -->
+      {% if messages %}
+         <div class="mb-3">
+            {% for message in messages %}
+               <ul class="list-group rounded">
+                  <li style="padding-top: 7px; padding-bottom: 7px"
+                      class="list-group-item list-group-item-info">
+                     {{ message }}
+                  </li>
+               </ul>
+            {% endfor %}
+         </div>
+      {% endif %}
+
+      <div class="row mb-3">
+         <div class="row">
+            <div class="col-md-8">
+               <div class="row">
+                  <div class="col-xl-2  font-weight-bold mb-1">Nome</div>
+                  <div class="col-xl-6">{{ parceiro.nome }}</div>
+               </div>
+               <div class="row">
+                  <div class="col-xl-2 font-weight-bold mb-1">Categoria</div>
+                  <div class="col-xl-6">{{ parceiro.categoria }}</div>
+               </div>
+               <div class="row">
+                  <div class="col-xl-2 font-weight-bold mb-1">Telefone</div>
+                  <div class="col-xl-6">{{ parceiro.telefone }}</div>
+               </div>
+               <div class="row">
+                  <div class="col-xl-2 col-lg-3 col-4 font-weight-bold mb-1">CNPJ</div>
+                  <div class="col-xl-6">{{ parceiro.cnpj }}</div>
+               </div>
+
+               {% if parceiro.id %}
+               <div class="form-inline mt-4">
+                  <a href="{% url 'parceiro:edita_parceiro' parceiro.id %}" class="btn btn-light mr-3">
+                    <i class="fa-solid fa-user-pen"></i> Editar
+                  </a>
+
+                  <form action="{% url 'parceiro:remove_parceiro' %}" method="POST">
+                     {% csrf_token %}
+                     <button type="submit" class="btn btn-light">
+                      <i class="fa-solid fa-user-minus"></i>  Remover
+                     </button>
+                  </form>
+               </div>
+            </div>
+             {% endif %}
+
+            <div class="col-md-3">
+               {% if parceiro.imagem != "" %}
+               <img src="{% static 'images/' %}{{ parceiro.imagem }}" class=" w-50">
+               {%endif %}
+            </div>
+         </div>
+      </div>
+   <hr>
+</div>
+</div>
+   <div class="mt-5"></div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

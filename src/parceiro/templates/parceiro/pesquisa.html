@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block titulo %}
+   Pesquisa Parceiros
+{% endblock %}
+
+{% block corpo %}
+   <div class="container mt-5">
+      <div class='mb-4'>
+         <h5>Pesquisa de Parceiros</h5>
+      </div>
+
+      <form action="" method ='GET' class="mb-4">
+         <div class='form-group row' style='margin-bottom: 10px;'>
+            <label for='id_nome' class='col-lg-2 col-form-label font-weight-bold'>
+               Nome
+            </label>
+            <div class='col-lg-10'>
+               {{ form.nome }}
+               <!--
+               <input type='text' name='nome' id='id_nome' class='form-control form-control-sm' maxlength='100'>
+               -->
+            </div>
+         </div>
+         <div class='form-group row'>
+            <div class="col-lg-5 offset-lg-2">
+               <button type='submit' class='btn btn-light'>
+                  <div class="d-flex align-items-center">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                     Pesquisar
+                  </div>
+               </button>
+               <button type="button" class='btn btn-light' >
+                  <a class="nav-link nav-item" href="{% url 'parceiro:cadastra_parceiro' %}">
+                     <div class="d-flex align-items-center">
+                        <i class="fa-sharp fa-solid fa-star"></i>
+                        Cadastrar
+                     </div>
+                  </a>
+               </button>
+            </div>
+         </div>
+      </form>
+
+      <!-- <div style="min-height: 212px"> -->
+         {% if parceiros %}
+            <h5 class="mb-3">Lista de Parceiros</h5>
+            <table style='width:100%'
+                   class='table table-hover table-primary shadow-lg table-responsive mb-4'>
+               <thead>
+                  <tr>
+                     <th class='text-center'>Nome</th>
+                     <th class="text-center">Categoria</th>
+                     <th class="text-center">Telefone</th>
+                     <th class="text-center">CNPJ</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  {% for parceiro in parceiros %}
+                     <tr>
+                        <td width="15%" class="align-middle">
+                           <a href="{% url 'parceiro:exibe_parceiro' parceiro.id %}">
+                              {{ parceiro.nome }}
+                           </a>
+                        </td>
+                        <td width="10%" class="text-center align-middle">
+                           {{ parceiro.categoria }}
+                        </td>
+                        <td width="15%" class="text-center align-middle">
+                           {{ parceiro.telefone }}
+                        </td>
+                        <td width="10%" class="text-right align-middle pr-3">
+                           {{ parceiro.cnpj }}
+                        </td>
+                     </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+
+            <div style='font-size: 14px; margin-bottom: 28px'>
+               {% if parceiros.has_other_pages %}
+                  <ul class='pagination'>
+                     {% if parceiros.has_previous %}
+                        <li class='page-item'><a class='page-link' href='?pagina={{ parceiro.previous_page_number }}&nome={{nome}}'>Anterior</a></li>
+                     {% else %}
+                        <li class='page-item disabled'><a class='page-link' href='#' tabindex='-1'>Anterior</a></li>
+                     {% endif %}
+                     {% for i in parceiros.paginator.page_range %}
+                        {% if parceiros.number == i %}
+                           <li class='page-item active'><a class='page-link' href='#'>{{ i }} </a></li>
+                        {% else %}
+                           <li class='page-item'><a class='page-link' href='?pagina={{ i }}&nome={{nome}}'>{{ i }}</a></li>
+                        {% endif %}
+                     {% endfor %}
+                     {% if parceiros.has_next %}
+                        <li class='page-item'><a class='page-link' href='?pagina={{ parceiros.next_page_number }}&nome={{nome}}'>Próxima</a></li>
+                     {% else %}
+                        <li class='page-item disabled'><a class='page-link' href='#' tabindex='-1'>Próxima</a></li>
+                     {% endif %}
+                  </ul>
+               {% endif %}
+            </div>
+         {% endif %}
+   </div>
+
+{% endblock %}

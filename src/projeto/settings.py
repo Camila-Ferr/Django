@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'inicial',
     'login',
     'ranking',
-    'metas'
+    'metas',
+    'parceiro',
+    'categoria'
 ]
 
 MIDDLEWARE = [

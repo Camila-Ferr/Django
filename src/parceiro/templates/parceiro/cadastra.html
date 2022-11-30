@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block titulo %}
+   Cadastro de Parceiro
+{% endblock %}
+
+{% block corpo %}
+<div class="container mt-5">
+   <div class='mb-4'>
+      <h5>Cadastro de Parceiros</h5>
+      <hr class='mt-0'>
+   </div>
+
+   <form action="{% url 'parceiro:cadastra_parceiro' %}" method="POST" class="pb-4" novalidate>
+      <div class="row mb-xl-3">
+         <div class="col-xl-6">
+            <div class="row">
+               <label for="id_nome" class="col-xl-2 font-weight-bold">Nome</label>
+               <div class="col-xl-10">
+                  {{ form.nome }}
+                  {# <input type="text" name="nome" maxlength="100" required="" id="id_nome"> #}
+                  {% if form.nome.errors %}
+                     <div class="alert alert-danger mb-0" role="alert" style="padding-top: 2px; padding-bottom: 2px">
+                        {% for error in form.nome.errors %}
+                           <small>{{ error }}</small>
+                        {% endfor %}
+                     </div>
+                  {% endif %}
+               </div>
+            </div>
+         </div>
+         <div class="col-xl-6">
+            <div class="row">
+               <label for="id_categoria" class="col-xl-2 font-weight-bold">Categoria</label>
+               <div class="col-xl-10">
+                  {{ form.categoria }}
+                  {% comment %}
+                     <select name="categoria" required="" id="id_categoria">
+                        <option value="" selected="">---------</option>
+                        <option value="1">Autor Independente</option>
+                        <option value="2">Livraria</option>
+                        <option value="3">Editora</option>
+                     </select>
+                  {% endcomment %}
+                  {% if form.categoria.errors %}
+                     <div class="alert alert-danger mb-0" role="alert" style="padding-top: 2px; padding-bottom: 2px">
+                        {% for error in form.categoria.errors %}
+                           <small>{{ error }}</small>
+                        {% endfor %}
+                     </div>
+                  {% endif %}
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="row mb-xl-3">
+         <div class="col-xl-6">
+            <div class="row">
+               <label for="id_telefone" class="col-xl-2 font-weight-bold">Telefone</label>
+                <div class="col-xl-9">
+                  {{ form.telefone }}
+                  {# <input type="text" name="telefone" maxlength="100" required="" id="id_telefone"> #}
+                  {% if form.telefone.errors %}
+                     <div class="alert alert-danger mb-0" role="alert" style="padding-top: 2px; padding-bottom: 2px">
+                        {% for error in form.telefone.errors %}
+                           <small>{{ error }}</small>
+                        {% endfor %}
+                     </div>
+                  {% endif %}
+               </div>
+            </div>
+         </div>
+         <div class="col-xl-6">
+            <div class="row">
+               <label for="id_cnpj" class="col-xl-3 font-weight-bold">CNPJ</label>
+               <div class="col-xl-9">
+                  {{ form.cnpj }}
+                  {# <input type="text" name="cnpj" required="" id="id_cnpj"> #}
+                  {% if form.cnpj.errors %}
+                     <div class="alert alert-danger mb-0" role="alert" style="padding-top: 2px; padding-bottom: 2px">
+                        {% for error in form.cnpj.errors %}
+                           <small>{{ error }}</small>
+                        {% endfor %}
+                     </div>
+                  {% endif %}
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <div class="row mb-5">
+         <div class="col-xl-6">
+            <div class="row">
+               <div class="col-xl-10 offset-xl-2">
+                  {% csrf_token %}
+                  <button id="botao" type="submit" class="btn btn-light">
+                     {% if 'parceiro_id' in request.session %}
+                        <i class="fa-solid fa-user-pen"></i> Alterar
+                     {% else %}
+                        <i class="fa-solid fa-file"></i> Cadastrar
+                     {% endif %}
+                  </button>
+               </div>
+            </div>
+         </div>
+      </div>
+
+   </form>
+</div>
+
+{% endblock %}
+
+{% block domready %}
+
+{% endblock %}
