@@ -1,18 +1,19 @@
 {% load static %}
-
+{% load humanize %}
 {% block corpo %}
 
-   <!-- <div style="min-height: 212px"> -->
+
       {% if listas %}
-         <h5 class="mb-3">Lista de Produtos</h5>
+         <h5 class="mb-3">Carrinho</h5>
          <table style='width:100%'
-                class='table table-striped table-sm table-bordered table-responsive mb-4'>
+                class='table table-hover table-primary shadow-lg table-bordered table-responsive mb-4'>
             <thead>
                <tr>
                   <th class='text-center'>Categoria</th>
                   <th class='text-center'>Nome</th>
                   <th class="text-center">Quantidade</th>
-                  <th class="text-center">Preço</th>
+                  <th class="text-center">Preço Unitário</th>
+                  <th class="text-center">Preço Parcial</th>
                   <th class="text-center">Operação</th>
                </tr>
             </thead>
@@ -22,32 +23,37 @@
                      <td width="10%" class="text-center align-middle">
                         {{ item.categoria }}
                      </td>
-                     <td width="35%" class="align-middle">
+                     <td width="35%" class="text-center align-middle">
                            {{ item.nome }}
                      </td>
                      <td width="10%" class="text-right align-middle pr-3">
                         <form class="mx-auto" style="width: auto" action="{% url 'produto:atualiza_produtos' %}" method="POST" novalidate>
+                           {%csrf_token %}
                            {{ form.id }}
-                           {{ form.qtd }}
+                           {{ form.quantidade }}
                         </form>
                      </td>
                      <td width="15%" class="text-right align-middle pr-3">
                         {{ item.preco }}
                      </td>
+                     <td width="10%" class="text-right align-middle pr-3 preco-parcial">
+                        {{ item.precoParcial| intcomma }}
+                     </td>
                      <td width="15%" class="text-right align-middle pr-3">
                         <form action="{% url 'produto:atualiza_produtos' %}" method="POST" novalidate>
+                           {%csrf_token %}
                            {{ form.id }}
-                           <button type="button" class="btn btn-sm btn-danger remover" tabindex="-1">Remover</button>
+                           <button type="button" class="btn btn-sm btn-dark remover mr-4" tabindex="-1">Remover</button>
                         </form>
                      </td>
                   </tr>
                {% endfor %}
                <tr id="ultimoTr">
-                  <td colspan="3">
-                     <strong style="margin-left: 10px">Valor total: </strong>
+                  <td colspan="4">
+                     <strong style="margin-left: 10px">Valor do carrinho: </strong>
                   </td>
                   <td class="text-right pr-5">
-                     <strong id="valor-total">{{ valor_total }}</strong>
+                     <strong id="valor-total">{{ valorTotal }}</strong>
                   </td>
                   <td></td>
                </tr>
@@ -55,6 +61,5 @@
          </table>
 
       {% endif %}
-   <!-- </div> -->
 
 {% endblock %}

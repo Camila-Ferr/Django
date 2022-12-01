@@ -33,31 +33,32 @@ def lista_parceiro(request):
 def cadastra_parceiro(request):
 
     if request.method == 'POST':
-        ## Recupera o valor que esta salvo no objeto sessão com a chave fornecedor_id
+        # Recupera o valor que esta salvo no objeto sessão com a chave parceiro_id se vier do editar
         parceiro_id = request.session.get('parceiro_id')
 
         ## Se for diferente de None
         if parceiro_id:
-            ## Recupera do banco de dados o fornecedor q possui o id recuperado no fornecedor_id
+            # Recupera do banco de dados o parceiro q possui o id recuperado
             parceiro = get_object_or_404(Parceiro, pk=parceiro_id)
-            ## Cria um FornecedorForm a parti da requisição e dos dados do fornecedor recuperados do banco de dados
+            # Cria um ParceiroForm a parti da requisição e dos dados do parceiro recuperados do banco de dados
+            #o objeto vai existir do criar ou do editar
             parceiro_form = ParceiroForm(request.POST, instance=parceiro)
 
         else:
-            ## Se não existir um valor associado a chave fornecedor_id no objeto sessão
+            # Se não existir um valor associado a chave parceiro_id no objeto sessão
             parceiro_form = ParceiroForm(request.POST)
 
-        ## Faz a validação dos campos do FornecedorForm criado
+        # Faz a validação dos campos do ParceiroForm criado
         if parceiro_form.is_valid():
-            ## Retornando um objeto que ainda n foi gravado no banco de dados e pode ser alterado
+            # Retornando um objeto que ainda n foi gravado no banco de dados e pode ser alterado
             parceiro = parceiro_form.save(commit=False)
-            ## Salva no banco de dados
+            # Salva no banco de dados
             parceiro.save()
 
-            ## Verifica se o fornecedor_id é diferente de None
+            # Verifica se o parceiro_id é diferente de None
             if parceiro_id:
                 messages.add_message(request, messages.INFO, 'Parceiro alterado com sucesso!')
-                ## deleta do objeto sessão o id associado a chave fornecedor_id
+                # deleta do objeto sessão o id associado a chave
                 del request.session['parceiro_id']
             else:
                 messages.add_message(request, messages.INFO, 'Parceiro cadastrado com sucesso!')

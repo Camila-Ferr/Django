@@ -1,11 +1,24 @@
 from categoria.models import Categoria
-categoria1 = Categoria(nome = "Editora", slug="editora")
-categoria2 = Categoria(nome = "Livraria", slug="livraria")
-categoria3 = Categoria(nome = "Autor Independente", slug="autor")
+categoria1 = Categoria(nome = "Box de Livros", slug="box")
+categoria2 = Categoria(nome = "Literatura Juvenil", slug="jovem")
+categoria3 = Categoria(nome = "Literatura Clássica", slug="clássico")
+categoria4 = Categoria(nome = "Contos de terror", slug="contos_terror")
+categoria5 = Categoria(nome = "Terror", slug="terror")
+categoria6 = Categoria(nome = "Suspense", slug="suspense")
+categoria6 = Categoria(nome = "Fantasia", slug="fantasia")
+categoria7 = Categoria(nome = "Religioso", slug="religioso")
+categoria8 = Categoria(nome = "Romance", slug="romance")
+categoria9 = Categoria(nome = "Auto Ajuda", slug="auto_ajuda")
 
 categoria1.save()
 categoria2.save()
 categoria3.save()
+categoria4.save()
+categoria5.save()
+categoria6.save()
+categoria7.save()
+categoria8.save()
+categoria9.save()
 
 from parceiro.models import Parceiro
 parceiro1 = Parceiro(nome = "Editora A", categoria="Editora", telefone="12345678", cnpj = "03.778.130/0001-48", imagem="editora.png")

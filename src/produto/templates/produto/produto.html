@@ -34,31 +34,52 @@
     $.get("{% url 'produto:lista_produtos' %}", function (resposta) {
         $("#tabela").html(resposta)
     })
-
+    //No momento em que o blur perder o foco, a tag #tabela
     $("#tabela").on("blur", "input", function() {
+
+    //Recupera o valor da caixa de texto
         let valor = $(this).val()
+
+        //Se for menor que 1, volta o foco para a caixa de texto e retorna
         if(valor < 1) {
             $(this).focus()
             return
         }
+
+        //Recupera o pai da caixa de texto, no caso, o form
         let form = $(this).parent()
+
+        //Recupera o tr
+        let tr = form.parent().parent()
+        console.log(tr)
+
+        //Recupera o valor do action do form, ou seja, o endereço
         let url = form.attr("action")
+
+        //Retorna um array de JS contendo chave e valor do objeto form
         let formData = form.serializeArray()
+        //Chave : csrf_id, produto_id, quantidade
+
+        //Submetendo uma requisição ajax
         $.post(url, formData, function(resposta) {
-            $("#valor-total").text(resposta.preco_total)
+            //Atualizando valor-total
+            $("#valor-total").text(resposta.precoTotal)
+            //Adicionando a classe css preco-parcial a resposta.precoParcial
+            tr.find(".preco-parcial").text(resposta.precoParcial)
+
         })
     })
 
     $("#tabela").on("click", ".remover", function() {
         let form = $(this).parent()
-        form.append('<input type="hidden" name="qtd" value="0"> ')
+        form.append('<input type="hidden" name="quantidade" value="0"> ')
         let tr = form.parent().parent()
         let url = form.attr("action")
         let formData = form.serializeArray()
         $.post(url, formData, function(resposta){
             tr.fadeTo('slow', 0.3, function() {
                 $(this).remove()
-                $("#valor-total").text(resposta.preco_total)
+                $("#valor-total").text(resposta.precoTotal)
             })
         })
     })
@@ -69,28 +90,31 @@
         let url = form.attr("action")
         let formData = form.serializeArray()
         $.post(url, formData, function(resposta){
-            $("#valor-total").text(resposta.preco_total)
+            $("#valor-total").text(resposta.precoTotal)
             $(`
                 <tr>
                      <td width="10%" class="text-center align-middle">
                         ${ resposta.categoria.nome }
                      </td>
-                     <td width="35%" class="align-middle">
+                     <td width="35%" class="align-middle text-center">
                            ${ resposta.novoProduto.nome }
                      </td>
                      <td width="10%" class="text-right align-middle pr-3">
                         <form class="mx-auto" style="width: auto" action="{% url 'produto:atualiza_produtos' %}" method="POST" novalidate>
                             <input type="hidden" value=${ resposta.novoProduto.id } name="id"/>
-                            <input type="text" value=${ resposta.novoProduto.qtd } name="qtd"/>
+                            <input type="text" value=${ resposta.novoProduto.quantidade } name="quantidade"/>
                         </form>
                      </td>
                      <td width="15%" class="text-right align-middle pr-3">
                         ${ resposta.novoProduto.preco }
                      </td>
+                    <td width="15%" class="text-right align-middle pr-3 preco-parcial">
+                        ${ resposta.novoProduto.precoParcial }
+                     </td>
                      <td width="15%" class="text-right align-middle pr-3">
                         <form action="{% url 'produto:atualiza_produtos' %}" method="POST" novalidate>
                             <input type="hidden" value=${ resposta.novoProduto.id } name="id" />
-                           <button type="button" class="btn btn-sm btn-danger remover" tabindex="-1">Remover</button>
+                           <button type="button" class="btn btn-sm btn-dark remover mr-4" tabindex="-1">Remover</button>
                         </form>
                      </td>
                   </tr>
