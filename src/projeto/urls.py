@@ -8,11 +8,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('ranking/', include('ranking.urls')),
     path('parceiro/',include('parceiro.urls')),
-    path('metas/', include('metas.urls'))
+    path('metas/', include('metas.urls')),
+    path('produto/', include('produto.urls'))
 ]
 
-#     Como acessar a página index.html do projeto:
+#     Como acessar a página produto.html do projeto:
 #     http://127.0.0.1:8000/
 #
-#     Como acessar a página index.html de inicial:
+#     Como acessar a página produto.html de inicial:
 #     http://127.0.0.1:8000/inicial/

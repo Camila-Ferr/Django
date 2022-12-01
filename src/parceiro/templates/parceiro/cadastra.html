@@ -36,14 +36,12 @@
                <label for="id_categoria" class="col-xl-2 font-weight-bold">Categoria</label>
                <div class="col-xl-10">
                   {{ form.categoria }}
-                  {% comment %}
                      <select name="categoria" required="" id="id_categoria">
                         <option value="" selected="">---------</option>
-                        <option value="1">Autor Independente</option>
-                        <option value="2">Livraria</option>
-                        <option value="3">Editora</option>
+                        <option value="Autor">Autor Independente</option>
+                        <option value="Livraria">Livraria</option>
+                        <option value="Editora">Editora</option>
                      </select>
-                  {% endcomment %}
                   {% if form.categoria.errors %}
                      <div class="alert alert-danger mb-0" role="alert" style="padding-top: 2px; padding-bottom: 2px">
                         {% for error in form.categoria.errors %}

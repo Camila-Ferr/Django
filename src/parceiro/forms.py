@@ -23,7 +23,6 @@ class ParceiroForm(forms.ModelForm):
         self.fields['categoria'].error_messages = {'required': 'Campo obrigatório'}
         self.fields['categoria'].queryset = Categoria.objects.all().order_by('nome')
         self.fields['categoria'].empty_label = '--- Selecione uma categoria ---'
-        self.fields['categoria'].widget.attrs.update({'class': 'form-control form-control-sm'})
 
         self.fields['telefone'].error_messages = {'required': 'Campo obrigatório'}
         self.fields['telefone'].widget.attrs.update({'class': 'form-control form-control-sm'})
