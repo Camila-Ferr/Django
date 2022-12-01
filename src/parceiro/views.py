@@ -79,9 +79,9 @@ def cadastra_parceiro(request):
 
 
 def exibe_parceiro(request, id):
-    ## Recupera do banco o usuario recem cadastrado passando em pk o id do usuario armazenado no objeto sessão associado a chave fornecedorId
+    # Recupera do banco o usuario recem cadastrado passando em pk o id do usuario armazenado no objeto sessão associado a chave parceiroId
     parceiro = get_object_or_404(Parceiro, pk=id)
-    ## Salvar no objeto sessão utilizando a chave fornecedor_id_del o id do fornecedor que foi exibido, para caso seja solicitado a remoção do fornecedor
+    # Salvar no objeto sessão utilizando a chave fornecedor_id_del o id do fornecedor que foi exibido, para caso seja solicitado a remoção do parceiro
     request.session['parceiro_id_del'] = id
     return render(request, 'parceiro/exibe.html', {'parceiro': parceiro})
 
@@ -90,15 +90,15 @@ def exibe_parceiro(request, id):
 
 
 def remove_parceiro(request):
-    ## Recupera o id do fornecedor salvo no objeto sessão
+    # Recupera o id do parceiro salvo no objeto sessão
     parceiro_id = request.session.get('parceiro_id_del')
-    ## Recupera do banco o fornecedor com o id recuperado acima
+    # Recupera do banco o parceiro com o id recuperado acima
     parceiro = get_object_or_404(Parceiro, id=parceiro_id)
-    ## Deleta o fornecedor do banco de dados
+    # Deleta o parceiro do banco de dados
     parceiro.delete()
-    ## deleta do objeto sessão o id associado a chave fornecedor_id_del
+    # deleta do objeto sessão o id associado a chave parceiro_id_del
     del request.session['parceiro_id_del']
-    ## Mostra na tela a menssagem Fornecedor removido com sucesso
+    # Mostra na tela a menssagem Parceiro removido com sucesso
     messages.add_message(request, messages.INFO, 'Parceiro removido com sucesso.')
     return render(request, 'parceiro/exibe.html', {'parceiro': parceiro})
 
