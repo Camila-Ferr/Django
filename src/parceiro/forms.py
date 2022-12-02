@@ -55,6 +55,7 @@ class ParceiroForm(forms.ModelForm):
         raise ValidationError("CNPJ Inválido")
 
 
+#Formulario que possui o campo nome
 class PesquisaParceiro(forms.Form):
 
     nome = forms.CharField(

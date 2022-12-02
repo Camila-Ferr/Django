@@ -27,14 +27,16 @@
 {% endblock %}
 
 {% block domready %}
+    //Requisição ajax pra cadastra produto, e recebe uma resposta (o cadastro.html)
     $.get("{% url 'produto:cadastra_produto' %}", function (resposta) {
         $("#form").html(resposta)
     })
 
+//Requisição ajax pra lista_produtos, e recebe uma resposta (o lista.html completo)
     $.get("{% url 'produto:lista_produtos' %}", function (resposta) {
         $("#tabela").html(resposta)
     })
-    //No momento em que o blur perder o foco, a tag #tabela
+    //No momento em que o input que pertence ao elemento que tem o id tabela perder o foco
     $("#tabela").on("blur", "input", function() {
 
     //Recupera o valor da caixa de texto
@@ -51,7 +53,6 @@
 
         //Recupera o tr
         let tr = form.parent().parent()
-        console.log(tr)
 
         //Recupera o valor do action do form, ou seja, o endereço
         let url = form.attr("action")
@@ -72,10 +73,12 @@
 
     $("#tabela").on("click", ".remover", function() {
         let form = $(this).parent()
+        //Acrescenta um input com nome quantidade e valor 0
         form.append('<input type="hidden" name="quantidade" value="0"> ')
         let tr = form.parent().parent()
         let url = form.attr("action")
         let formData = form.serializeArray()
+        //Envia a req ajax usando o método post
         $.post(url, formData, function(resposta){
             tr.fadeTo('slow', 0.3, function() {
                 $(this).remove()
@@ -85,6 +88,7 @@
     })
 
     $("#form").on("click", ".adicionar", function() {
+        //Pega o formulario
         let form = $("#form").children()
         let tr = form.parent().parent()
         let url = form.attr("action")

@@ -7,14 +7,17 @@ from parceiro.forms import PesquisaParceiro, ParceiroForm
 from parceiro.models import Parceiro
 
 
-
+#Pesquisa
 def lista_parceiro(request):
+    #Formulario montado a partir da requisição GET
     form = PesquisaParceiro(request.GET)
     if form.is_valid():
+        #valor digitado pelo cliente no campo nome
         nome = form.cleaned_data['nome']
         lista_de_parceiro = Parceiro.objects.filter(nome__icontains=nome).order_by('nome')
-
+        #instancia um paginator
         paginator = Paginator(lista_de_parceiro, 3)
+        #Parametro na url da requisição get (n da página)
         pagina = request.GET.get('pagina')
 
         # Retorna a pagina a partir da variavel pagina
@@ -36,12 +39,11 @@ def cadastra_parceiro(request):
         # Recupera o valor que esta salvo no objeto sessão com a chave parceiro_id se vier do editar
         parceiro_id = request.session.get('parceiro_id')
 
-        ## Se for diferente de None
+        # Se for diferente de None
         if parceiro_id:
             # Recupera do banco de dados o parceiro q possui o id recuperado
             parceiro = get_object_or_404(Parceiro, pk=parceiro_id)
             # Cria um ParceiroForm a parti da requisição e dos dados do parceiro recuperados do banco de dados
-            #o objeto vai existir do criar ou do editar
             parceiro_form = ParceiroForm(request.POST, instance=parceiro)
 
         else:
@@ -81,7 +83,7 @@ def cadastra_parceiro(request):
 def exibe_parceiro(request, id):
     # Recupera do banco o usuario recem cadastrado passando em pk o id do usuario armazenado no objeto sessão associado a chave parceiroId
     parceiro = get_object_or_404(Parceiro, pk=id)
-    # Salvar no objeto sessão utilizando a chave fornecedor_id_del o id do fornecedor que foi exibido, para caso seja solicitado a remoção do parceiro
+    # Salvar no objeto sessão utilizando a chave parceiro id_del o id do parceiro que foi exibido, para caso seja solicitado a remoção do parceiro
     request.session['parceiro_id_del'] = id
     return render(request, 'parceiro/exibe.html', {'parceiro': parceiro})
 

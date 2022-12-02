@@ -51,7 +51,7 @@ def atualiza_produtos(request):
 
         valor = locale.currency(preco_total, grouping=True)
         valorParcial = locale.currency(precoParcial, grouping=True)
-        print(valorParcial)
+
 
 
         #Retorna um objeto Json contendo essas 3 info
@@ -84,6 +84,7 @@ def lista_produtos(request):
 
 
 def cadastra_produto(request):
+    #Substitui o request.is_ajax
     if request.headers.get('x-requested-with') == 'XMLHttpRequest' and request.POST:
         produto_form = ProdutoForm(request.POST)
         if produto_form.is_valid():
